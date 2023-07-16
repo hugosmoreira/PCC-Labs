@@ -23,7 +23,7 @@ You have burned approximately 684.00 calories by doing running for 60.0 minutes.
 
 
 
-# Constants can be declared outside of main()
+# Dictionary of calories burned per minute for each exercise type
 calories_per_minute = {
     "biking": 8.5,
     "running": 11.4,
