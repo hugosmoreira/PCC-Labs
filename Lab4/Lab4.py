@@ -1,4 +1,29 @@
-# Dictionary of calories burned per minute for each exercise type
+
+#******************************************************************************
+# Author:           Hugo Moreira
+# Lab:              Lab3
+# Date:             7/18/2023
+# Description:      Estimated calories burned per minute for each exercise type
+#                   prints a message to the screen.
+# Input:            Exercise type, Duration of exercise
+# Output:           If a recognized exercise type is provided, the output is a printed statement indicating the number of calories burned if not "Sorry, that exercise type is not recognized by this program."
+# Sources:          Lab 3 specifications
+#
+#
+#******************************************************************************
+
+"""
+Sample Run:
+-----------
+Please enter the type of exercise (biking, running, swimming, yoga, jiujitsu): running
+Please enter the number of minutes you exercised: 60
+You have burned approximately 684.00 calories by doing running for 60.0 minutes.
+
+
+"""
+
+
+# Constants can be declared outside of main()
 calories_per_minute = {
     "biking": 8.5,
     "running": 11.4,
@@ -10,39 +35,51 @@ calories_per_minute = {
 def get_exercise_type():
     """
     Gets the type of exercise from the user and returns it.
+    If the input is not recognized, prompts the user to re-enter.
     """
-    exercise_type = input("Please enter the type of exercise (biking, running, swimming, yoga, jiujitsu): ")
-    return exercise_type
+    while True:
+        exercise_type = input(
+            "Please enter the type of exercise "
+            "(biking, running, swimming, yoga, jiujitsu): "
+        )
+        if exercise_type in calories_per_minute:
+            return exercise_type
+        else:
+            print("Sorry, that exercise type is not recognized. Please try again.")
 
 def get_minutes():
     """
     Gets the number of minutes exercised from the user and returns it.
+    If the input is not a positive number, prompts the user to re-enter.
     """
-    minutes = float(input("Please enter the number of minutes you exercised: "))
-    return minutes
+    while True:
+        minutes = float(input("Please enter the number of minutes you exercised: "))
+        if minutes > 0:
+            return minutes
+        else:
+            print("Please enter a positive number for the minutes.")
 
 def calculate_calories_burned(exercise_type, minutes):
     """
-    Calculates and returns the number of calories burned based on exercise type and duration.
+    Calculates and returns the number of calories burned 
+    based on exercise type and duration.
     """
-    if exercise_type in calories_per_minute:
-        calories_burned = minutes * calories_per_minute[exercise_type]
-        return calories_burned
-    else:
-        return None
+    calories_burned = minutes * calories_per_minute[exercise_type]
+    return calories_burned
 
 def print_calories_burned(calories_burned, exercise_type, minutes):
     """
-    Prints the number of calories burned. If no valid exercise type was provided, informs the user that the type is not recognized.
+    Prints the number of calories burned.
     """
-    if calories_burned is not None:
-        print("You have burned approximately {:.2f} calories by doing {} for {} minutes.".format(calories_burned, exercise_type, minutes))
-    else:
-        print("Sorry, that exercise type is not recognized by this program.")
+    print(
+        "You have burned approximately {:.2f} calories by doing {} for {} minutes."
+        .format(calories_burned, exercise_type, minutes)
+    )
 
 def main():
     """
-    Main function that calls other functions to get input, process data, and produce output.
+    Main function that calls other functions to get input, 
+    process data, and produce output.
     """
     exercise_type = get_exercise_type()
     minutes = get_minutes()
