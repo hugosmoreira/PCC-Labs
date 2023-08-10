@@ -1,27 +1,36 @@
-
 #******************************************************************************
 # Author:           Hugo Moreira
-# Lab:              Lab5
+# Lab:              Lab6
 # Date:             7/03/2023
 # Description:      Estimated calories burned per minute for each exercise type
 #                   prints a message to the screen.
 # Input:            Exercise type, Duration of exercise
 # Output:           If a recognized exercise type is provided, the output is a printed statement indicating the number of calories burned if not "Sorry, that exercise type is not recognized by this program."
-# Sources:          Lab 5 specifications
+# Sources:          Lab 6 specifications
 #
 #
 #******************************************************************************
 
 """
-Sample Run:
------------
+Sample Run 1:
+-------------
+
 Please enter the type of exercise (biking, running, swimming, yoga, jiujitsu): running
 Please enter the number of minutes you exercised: 30
 You have burned approximately 342.00 calories by doing running for 30.0 minutes.
 Do you want to run the program again? (y/n): y
 
 
+Sample Run 2:
+-------------
+Please enter the type of exercise (biking, running, swimming, yoga, jiujitsu): swimming
+Please enter the number of minutes you exercised: 45
+You have burned approximately 327.50 calories by doing swimming for 45.0 minutes.
+Do you want to run the program again? (y/n): n
 """
+
+
+import valid
 
 # Constants can be declared outside of main()
 CALORIES_PER_MINUTE = {
@@ -37,7 +46,7 @@ def get_continue_input():
     Asks the user if they want to continue the program and returns their response.
     """
     while True:
-        continue_input = input("Do you want to run the program again? (y/n): ").lower()
+        continue_input = valid.get_y_or_n("Do you want to run the program again? (y/n): ")
         if continue_input in ['y', 'n']:
             return continue_input
         else:
@@ -49,7 +58,7 @@ def get_exercise_type():
     If the input is not recognized, prompts the user to re-enter.
     """
     while True:
-        exercise_type = input(
+        exercise_type = valid.get_string(
             "Please enter the type of exercise "
             "(biking, running, swimming, yoga, jiujitsu): "
         )
@@ -64,7 +73,7 @@ def get_minutes():
     If the input is not a positive number, prompts the user to re-enter.
     """
     while True:
-        minutes = float(input("Please enter the number of minutes you exercised: "))
+        minutes = valid.get_real("Please enter the number of minutes you exercised: ")
         if minutes > 0:
             return minutes
         else:
